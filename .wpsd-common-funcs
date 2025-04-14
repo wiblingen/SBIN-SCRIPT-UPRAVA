@@ -81,16 +81,14 @@ isDVmegaCast() { #obvs
 
 # connectivity check & version cacher
 conn_check() {
-    ProgVer="WPSD ConnectivityCheck & Version Cacher"
+    uAStr_chk="WPSD ConnectivityCheck & Version Cacher"
     connection_established=false
 
-    # Remote version file URL
     remote_version_url="${hostFileURL}/.WPSD_remote_version"
     ini_file="/etc/.WPSD_remote_version"
     temp_file="$(mktemp)"
 
-    # Fetch the remote version file
-    if curl --silent --fail --output "$temp_file" -A "${ProgVer}" "$remote_version_url"; then
+    if curl --silent --fail --output "$temp_file" -A "${uAStr_chk}" "$remote_version_url"; then
         connection_established=true
         mv "$temp_file" "$ini_file"
         chmod 644 "$ini_file"

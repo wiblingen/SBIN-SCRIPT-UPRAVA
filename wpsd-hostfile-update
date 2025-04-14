@@ -13,6 +13,7 @@ if [ "$(id -u)" != "0" ];then
 fi
 
 source /usr/local/sbin/.wpsd-common-funcs
+
 ProgVer="WPSD-HostFileUpdater v4.5"
 
 OptIntoDiags_value=${OptIntoDiags_value:-true}
