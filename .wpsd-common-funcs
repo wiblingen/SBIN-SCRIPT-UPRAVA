@@ -81,7 +81,7 @@ isDVmegaCast() { #obvs
 
 # connectivity check & version cacher
 conn_check() {
-    ProgVer="WPSD-HostFileUpdater v4.x ConnectivityCheck & Version Cacher"
+    ProgVer="WPSD-HostFileUpdater v4.5 ConnectivityCheck & Version Cacher"
     connection_established=false
 
     # Remote version file URL
