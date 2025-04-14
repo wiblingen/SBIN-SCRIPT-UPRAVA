@@ -15,8 +15,7 @@ hostFileURL="https://hostfiles.w0chp.net"
 gitBranch=$(git --work-tree=/var/www/dashboard --git-dir=/var/www/dashboard/.git symbolic-ref --short HEAD)
 dashVer=$( git --work-tree=/var/www/dashboard --git-dir=/var/www/dashboard/.git rev-parse --short=10 ${gitBranch} )
 uuidStr=$(egrep 'UUID' /etc/WPSD-release | awk {'print $3'})
-uaStr="Ver.# ${dashVer} Call:${CALL} UUID:${uuidStr} [${osName}]"
-uaStrSF="WPSD-SuppFiles Ver.# ${dashVer} Call:${CALL} UUID:${uuidStr} [${osName}]"
+uaStrSF="WPSD-SuppFiles"
 armbian_env_file="/boot/armbianEnv.txt"
 rc_local_file="/etc/rc.local"
 OptIntoDiags_value=$(grep -Po "OptIntoDiags = \K.*" /etc/WPSD-Dashboard-Config.ini)
@@ -91,7 +90,7 @@ conn_check() {
     temp_file="$(mktemp)"
 
     # Fetch the remote version file
-    if curl --silent --fail --output "$temp_file" -A "${ProgVer} ${uaStr}" "$remote_version_url"; then
+    if curl --silent --fail --output "$temp_file" -A "${ProgVer}" "$remote_version_url"; then
         connection_established=true
         mv "$temp_file" "$ini_file"
         chmod 644 "$ini_file"
