@@ -6,7 +6,7 @@
 #                                                     #
 #######################################################
 
-ProgVer="WPSD-HostFileUpdater v.4.5"
+ProgVer="WPSD-HostFileUpdater v4.5"
 
 # Check if we are root
 if [ "$(id -u)" != "0" ];then
