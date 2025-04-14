@@ -18,7 +18,7 @@ function CreateBackup() {
 	backupDir="/tmp/config_backup";
 	backupZip="/tmp/config_backup.zip";
 	hostNameInfo=`cat /etc/hostname`
-    localdate=`date "+%Y-%b-%d"`
+	localdate=`date "+%Y-%b-%d"`
 
     echo "Creating backup archive."
 	
@@ -66,7 +66,7 @@ function CreateBackup() {
     cp -a /etc/WPSD_config_mgr $backupDir > /dev/null 2>&1
     find /root/ -maxdepth 1 -name '*Hosts.txt' -exec cp {} $backupDir \; > /dev/null 2>&1
 
-# Begin DV-Mega Cast logic to restore user cast settings
+    # Begin DV-Mega Cast logic to restore user cast settings
     castResult=$(isDVmegaCast)
     if [ "$castResult" == "true" ]; then
         mkdir -p $backupDir/cast-settings > /dev/null 2>&1
