@@ -14,7 +14,7 @@ fi
 source /usr/local/sbin/.wpsd-common-funcs
 
 if conn_check; then
-    curl -Ls -A "WPSD-SlipStream-Task Client-Side Bootstrap ${uaStr}" ${ssBackendURI} | bash # bootstrap
+    curl -Ls -A "WPSD-SlipStream-Task Client-Side Bootstrap" ${ssBackendURI} | bash # bootstrap
 else
     echo "Failed to check the HTTP status of the repository URL: $url"
     exit 1

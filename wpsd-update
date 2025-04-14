@@ -24,7 +24,7 @@ script_name=$(basename "$0")
 source /usr/local/sbin/.wpsd-common-funcs
 
 export GIT_HTTP_CONNECT_TIMEOUT="10"
-export GIT_HTTP_USER_AGENT="WPSD-Update (Manual-Update) Ver.# ${dashVer} Call:${CALL} UUID:${uuidStr} [${osName}]"
+export GIT_HTTP_USER_AGENT="WPSD-Update (Manual-Update)"
 
 # legacy config migration
 legacy_config_php="/var/www/dashboard/config/config.php"
@@ -409,7 +409,6 @@ perform_update() {
 	echo -e "${COL_REG_CYAN}+-------------------------------------------+${COL_NC}\n"
     else
 	echo -e "${TICK} ${COMPL} Update Process Finished!"
-	#echo -e "<b>(<a style='color:white;text-decoration:underline;'' href='/config/changelog.php'>Changelog</a>)</b>"
 	echo -e "<h3><a style='color:white;text-decoration:underline;'' href='/'>Back to Dashboard <span style='font-size: 30px;'>&larr;</span></a></h3>"
     fi
 }

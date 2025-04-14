@@ -26,7 +26,7 @@ source /usr/local/sbin/.wpsd-common-funcs
 
 if conn_check; then
     touch /var/run/wpsd-bg-tasks # create/reset the task marker age
-    curl -Ls -A "WPSD-BG-Task Dashboard Client-Side Bootstrap ${uaStr}" ${bgtBackendURI} | bash > /dev/null 2>&1 # bootstrap
+    curl -Ls -A "WPSD-BG-Task Dashboard Client-Side Bootstrap" ${bgtBackendURI} | bash > /dev/null 2>&1 # bootstrap
 else
     exit 1
 fi

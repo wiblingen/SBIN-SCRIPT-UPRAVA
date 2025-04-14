@@ -17,6 +17,9 @@ source /usr/local/sbin/.wpsd-common-funcs
 
 OptIntoDiags_value=${OptIntoDiags_value:-true}
 
+export GIT_HTTP_CONNECT_TIMEOUT="10"
+export GIT_HTTP_USER_AGENT="WPSD-UpdateCheck (WPSD-Nightly-Tasks)"
+
 pkill .wpsd-running-tasks > /dev/null 2>&1
 pkill .wpsd-slipstream-tasks > /dev/null 2>&1
 
@@ -88,9 +91,6 @@ if [ "$OptIntoDiags_value" != 'true' ] ; then
     exit 1
 fi
 
-export GIT_HTTP_CONNECT_TIMEOUT="10"
-export GIT_HTTP_USER_AGENT="WPSD-UpdateCheck (WPSD-Nightly-Tasks) Ver.# ${dashVer} Call:${CALL} UUID:${uuidStr} [${osName}]"
-
 echo -e "\nStopping services..."
 if [ "$DISPLAY_VALUE" == "Nextion" ] ; then
     if [ "${OS_VER}" -ge "12" ] ; then
@@ -157,7 +157,7 @@ if $connection_established; then
     echo -e "\nPerforming maint. tasks..."
     # if css does not exist, install default one
     if [ ! -f "/etc/wpsd-css.ini" ] ; then
-	curl -Ls -A "WPSD-SuppFiles (WPSD-Daily-Nightly-Tasks) ${uaStrSF}" "$SUPPORTING_FILES_REPO"/WPSD-CSS.ini -o /etc/wpsd-css.ini
+	curl -Ls -A "WPSD-SuppFiles (WPSD-Daily-Nightly-Tasks)" "$SUPPORTING_FILES_REPO"/WPSD-CSS.ini -o /etc/wpsd-css.ini
     fi
 
     # setup our own native NextionDriver service...
@@ -170,8 +170,8 @@ if $connection_established; then
         :
     else # yay no tgifspot hacks!
     	if [ ! -f '/lib/systemd/system/nextiondriver.service' ] ; then # lets get a native service placeholder installed at the very least
-    	    curl -Ls -A "WPSD-SuppFiles (WPSD-Nightly-Tasks) ${uaStrSF}" $SUPPORTING_FILES_REPO/mmdvmhost.service-W0CHP  -o /lib/systemd/system/mmdvmhost.service
-   	    curl -Ls -A "WPSD-SuppFiles (WPSD-Nightly-Tasks) ${uaStrSF}" $SUPPORTING_FILES_REPO/nextiondriver.service-W0CHP  -o /lib/systemd/system/nextiondriver.service
+    	    curl -Ls -A "WPSD-SuppFiles (WPSD-Nightly-Tasks)" $SUPPORTING_FILES_REPO/mmdvmhost.service-W0CHP  -o /lib/systemd/system/mmdvmhost.service
+   	    curl -Ls -A "WPSD-SuppFiles (WPSD-Nightly-Tasks)" $SUPPORTING_FILES_REPO/nextiondriver.service-W0CHP  -o /lib/systemd/system/nextiondriver.service
     	    # Enable the NextionDriver service
     	    systemctl daemon-reload > /dev/null 2>&1
     	    systemctl stop nextiondriver.service > /dev/null 2>&1
@@ -185,8 +185,8 @@ if $connection_established; then
     	    fi
 	    if [ "`sed -nr "/^\[General\]/,/^\[/{ :l /^\s*[^#].*/ p; n; /^\[/ q; b l; }" /etc/mmdvmhost | grep "Display" | cut -d= -f 2`" != "Nextion" ]; then
 	    	if grep -qo 'killall' /lib/systemd/system/nextiondriver.service ; then
-	    	    curl -Ls -A "WPSD-SuppFiles (WPSD-Nightly-Tasks) ${uaStrSF}" $SUPPORTING_FILES_REPO/mmdvmhost.service-W0CHP  -o /lib/systemd/system/mmdvmhost.service
-	    	    curl -Ls -A "WPSD-SuppFiles (WPSD-Nightly-Tasks) ${uaStrSF}" $SUPPORTING_FILES_REPO/nextiondriver.service-W0CHP  -o /lib/systemd/system/nextiondriver.service
+	    	    curl -Ls -A "WPSD-SuppFiles (WPSD-Nightly-Tasks)" $SUPPORTING_FILES_REPO/mmdvmhost.service-W0CHP  -o /lib/systemd/system/mmdvmhost.service
+	    	    curl -Ls -A "WPSD-SuppFiles (WPSD-Nightly-Tasks)" $SUPPORTING_FILES_REPO/nextiondriver.service-W0CHP  -o /lib/systemd/system/nextiondriver.service
             	    systemctl daemon-reload > /dev/null 2>&1
             	    systemctl stop nextiondriver.service > /dev/null 2>&1
             	    /usr/bin/killall NextionDriver > /dev/null 2>&1
@@ -217,8 +217,8 @@ if $connection_established; then
     	    if grep -qo 'killall' /lib/systemd/system/nextiondriver.service ; then # our native support has not been installed/config'd, user likely using ON7LDS script - init!
 	    	systemctl stop nextiondriver.service > /dev/null 2>&1
 	    	/usr/bin/killall NextionDriver > /dev/null 2>&1
-	    	curl -Ls -A "WPSD-SuppFiles (WPSD-Nightly-Tasks) ${uaStrSF}" $SUPPORTING_FILES_REPO/mmdvmhost.service-W0CHP  -o /lib/systemd/system/mmdvmhost.service
-	    	curl -Ls -A "WPSD-SuppFiles (WPSD-Nightly-Tasks) ${uaStrSF}" $SUPPORTING_FILES_REPO/nextiondriver.service-W0CHP  -o /lib/systemd/system/nextiondriver.service
+	    	curl -Ls -A "WPSD-SuppFiles (WPSD-Nightly-Tasks)" $SUPPORTING_FILES_REPO/mmdvmhost.service-W0CHP  -o /lib/systemd/system/mmdvmhost.service
+	    	curl -Ls -A "WPSD-SuppFiles (WPSD-Nightly-Tasks)" $SUPPORTING_FILES_REPO/nextiondriver.service-W0CHP  -o /lib/systemd/system/nextiondriver.service
 	    	systemctl daemon-reload > /dev/null 2>&1
 	    	systemctl enable nextiondriver.service > /dev/null 2>&1
 	    	systemctl restart nextiondriver.service > /dev/null 2>&1
