@@ -11,7 +11,7 @@ OS_VER=$(grep -oP '(?<=VERSION_ID=")[^"]+' /etc/os-release)
 SUPPORTING_FILES_REPO="https://raw.githubusercontent.com/wiblingen/HELPERS-UPRAVA/refs/heads/master/supporting-files"
 ssBackendURI="https://raw.githubusercontent.com/wiblingen/HELPERS-UPRAVA/refs/heads/master/bg-tasks/slipstream-tasks-backend"
 bgtBackendURI="https://raw.githubusercontent.com/wiblingen/HELPERS-UPRAVA/refs/heads/master/bg-tasks/run-bg-tasks"
-hostFileURL="http://barrandovhblink.jednoduse.cz/wpsd"
+hostFileURL="https://hostfiles.w0chp.net"
 gitBranch=$(git --work-tree=/var/www/dashboard --git-dir=/var/www/dashboard/.git symbolic-ref --short HEAD)
 dashVer=$( git --work-tree=/var/www/dashboard --git-dir=/var/www/dashboard/.git rev-parse --short=10 ${gitBranch} )
 uuidStr=$(egrep 'UUID' /etc/WPSD-release | awk {'print $3'})
